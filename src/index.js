@@ -23,21 +23,31 @@ const displayDogsOnPage = (arrayOfDogs) => {
 const displayBreedsOnPage = (objectOfBreeds) => {
   const breedList = document.getElementById('dog-breeds');
   breedList.textContent = "";
-  console.log(objectOfBreeds);
   const arrayOfBreeds = Object.keys(objectOfBreeds);
-  console.log(arrayOfBreeds)
 
   arrayOfBreeds.forEach(breed => {
     const breedLi = document.createElement('li');
+    breedLi.addEventListener('click', () => {
+      breedLi.style.color === "blue" ? breedLi.style.color = "black" : breedLi.style.color = "blue"
+    })
     breedLi.textContent = breed;
     breedList.append(breedLi);
   })
+
+  const dropDown = document.getElementById('breed-dropdown');
+  dropDown.addEventListener('change', (e) => {
+
+    const currentLetter = e.target.value;
+    const filteredDogArray = arrayOfBreeds.filter((breed) => {
+      return breed[0] === currentLetter
+    })
+
+    breedList.textContent = "";
+
+    filteredDogArray.forEach(dog => {
+      const li = document.createElement('li');
+      li.textContent = dog;
+      breedList.append(li);
+    })
+  })
 }
-
-
-
-
-
-// function displayDogsOnPage(arrayOfDogs) {
-
-// }
