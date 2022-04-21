@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const imgUrl = "https://dog.ceo/api/breeds/image/random/4"
   const breedUrl = 'https://dog.ceo/api/breeds/list/all'
+  const dogForm = document.getElementById('dog-form');
 
   fetch(imgUrl)
     .then(resp => resp.json())
@@ -9,6 +10,14 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch(breedUrl)
     .then(resp => resp.json())
     .then(json => displayBreedsOnPage(json.message))
+
+
+  dogForm.addEventListener('submit', e => {
+    e.preventDefault();
+    console.log(e.target[0].value);
+    console.log(e.target[1].value);
+    console.log(e.target[2].value);
+  })
 })
 
 const displayDogsOnPage = (arrayOfDogs) => {
